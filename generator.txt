@@ -1,0 +1,18 @@
+[
+    nombreclase:Gun
+    Atributo:string|type
+    Atributo:int|damage
+    Atributo:double|price
+]
+[
+    nombreclase:Persona
+    Atributo:string|nombre
+    Atributo:int|edad
+]
+[
+    nombreclase:Cancion
+    Atributo:string|genero
+    Atributo:double|duracion
+    Atributo:string|artista
+    Atributo:int|numReproducciones
+]
