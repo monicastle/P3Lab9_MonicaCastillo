@@ -58,32 +58,104 @@ void guardarArchivo(vector<string> informacion){
     escritor << informacion[0] + "::" + informacion[0] + "() {" + "\n";
     escritor << "}" << "\n";
     escritor <<  "\n";
-    /*int num, dif;
+    int num;
     for (int i = 0; i < informacion.size(); i++){
         if (informacion[i] == ""){
             num = i - 1;
-        }     
-    }
+            break;
+        } // Fin If   
+    } // Fin For
     escritor << informacion[0] + "::" + informacion[0] + "("; 
-    for (int i = 1; i < num; i++){
-        if (i == dif - 1){
+    for (int i = 1; i <= num; i++){
+        if (i == num){
             string tipo, variable;
             int linea;
-            for (int j = 0; j < informacion[i].size(); j++){
-                if (informacion[] == '|'){
-                    
-                }
-                
-            }
-            
-            informacion[i]
-            escritor << informacion[i] + "::" + informacion[0] + "(";             
+            string atributo;
+            atributo = informacion[i];
+            for (int j = 0; j < atributo.size(); j++){
+                if (atributo[j] == '|'){
+                    linea = j;
+                } // Fin If            
+            } // Fin For
+            tipo = atributo.substr(0, linea);
+            variable = atributo.substr(linea + 1, atributo.size() - linea);
+            escritor << tipo + " _" + variable + "){" + "\n";             
         } else {
-
-        }  
-    }*/
-     
-    //escritor << informacion[0] + "::" + informacion[0] + "(";
+            string tipo, variable;
+            int linea;
+            string atributo;
+            atributo = informacion[i];
+            for (int j = 0; j < atributo.size(); j++){
+                if (atributo[j] == '|'){
+                    linea = j;
+                } // Fin If            
+            } // Fin For
+            tipo = atributo.substr(0, linea);
+            variable = atributo.substr(linea + 1, atributo.size() - linea);
+            escritor << tipo + " _" + variable + ", ";   
+        } // Fin If
+    } // Fin For
+    for (int i = 1; i <= num; i++){
+        string tipo, variable;
+        int linea;
+        string atributo;
+        atributo = informacion[i];
+        for (int j = 0; j < atributo.size(); j++){
+            if (atributo[j] == '|'){
+                linea = j;
+            } // Fin If            
+        } // Fin For
+        tipo = atributo.substr(0, linea);
+        variable = atributo.substr(linea + 1, atributo.size() - linea);
+        escritor << "    " + variable + " = _" + variable + ";" + "\n";   
+    } // Fin For
+    escritor << "}" << "\n";
+    escritor <<  "\n";
+    for (int i = 1; i <= num; i++){
+        string tipo, variable;
+        int linea;
+        string atributo;
+        atributo = informacion[i];
+        for (int j = 0; j < atributo.size(); j++){
+            if (atributo[j] == '|'){
+                linea = j;
+            } // Fin If            
+        } // Fin For
+        tipo = atributo.substr(0, linea);
+        variable = atributo.substr(linea + 1, atributo.size() - linea);
+        escritor << "void " + informacion[0] + "::set_" + variable + "(" + tipo + " _" + variable + "){" + "\n"; 
+        escritor << "    " + variable + " = _" + variable + ";" + "\n";
+        escritor << "}" << "\n";
+        escritor <<  "\n";
+    } // Fin For
+    for (int i = 1; i <= num; i++){
+        string tipo, variable;
+        int linea;
+        string atributo;
+        atributo = informacion[i];
+        for (int j = 0; j < atributo.size(); j++){
+            if (atributo[j] == '|'){
+                linea = j;
+            } // Fin If            
+        } // Fin For
+        tipo = atributo.substr(0, linea);
+        variable = atributo.substr(linea + 1, atributo.size() - linea);
+        escritor << tipo + " " + informacion[0] + "::get_" + variable + "(){" + "\n"; 
+        escritor << "    return " + variable + ";" + "\n";
+        escritor << "}" << "\n";
+        escritor <<  "\n";
+    } // Fin For
+    string name1;
+    name1 = informacion[0];
+    for (int i = 0; i < name1.size(); i++) {
+        name1[i] = toupper(name1[i]);
+    } // Fin For
+    escritor << "string " + informacion[0] + "::toString(){" +"\n"; 
+    escritor << "}" << "\n";
+    escritor <<  "\n";
+    escritor << informacion[0] + "::~" + informacion[0] + "() {" + "\n";
+    escritor << "}" << "\n";
+    escritor <<  "\n";
     escritor.close();
     escritor.open(nameh, ios::app);
     string name;
@@ -96,13 +168,86 @@ void guardarArchivo(vector<string> informacion){
     escritor << "#include <string>" << "\n";
     escritor << "using namespace std;" << "\n";
     escritor << "class " + informacion[0] + "{" + "\n";
-    escritor << "   private:" << "\n";
-    escritor << "   public:" << "\n";
-    escritor << informacion[0] + "();" + "\n";
+    escritor << "    private:" << "\n";
+    for (int i = 1; i <= num; i++){
+        string tipo, variable;
+        int linea;
+        string atributo;
+        atributo = informacion[i];
+        for (int j = 0; j < atributo.size(); j++){
+            if (atributo[j] == '|'){
+                linea = j;
+            } // Fin If            
+        } // Fin For
+        tipo = atributo.substr(0, linea);
+        variable = atributo.substr(linea + 1, atributo.size() - linea);
+        escritor << "        " + tipo + " " + variable + ";" + "\n"; 
+    } // Fin For
+    escritor << "    public:" << "\n";
+    escritor << "        " + informacion[0] + "();" + "\n";
+    escritor << "        " + informacion[0] << "(";
+    for (int i = 1; i <= num; i++){
+        if (i == num){
+            string tipo, variable;
+            int linea;
+            string atributo;
+            atributo = informacion[i];
+            for (int j = 0; j < atributo.size(); j++){
+                if (atributo[j] == '|'){
+                    linea = j;
+                } // Fin If            
+            } // Fin For
+            tipo = atributo.substr(0, linea);
+            variable = atributo.substr(linea + 1, atributo.size() - linea);
+            escritor << tipo + ");" + "\n";  
+        } else {
+            string tipo, variable;
+            int linea;
+            string atributo;
+            atributo = informacion[i];
+            for (int j = 0; j < atributo.size(); j++){
+                if (atributo[j] == '|'){
+                    linea = j;
+                } // Fin If            
+            } // Fin For
+            tipo = atributo.substr(0, linea);
+            variable = atributo.substr(linea + 1, atributo.size() - linea);
+            escritor << tipo + ", ";   
+        } // Fin If
+    } // Fin For
+    for (int i = 1; i <= num; i++){
+        string tipo, variable;
+        int linea;
+        string atributo;
+        atributo = informacion[i];
+        for (int j = 0; j < atributo.size(); j++){
+            if (atributo[j] == '|'){
+                linea = j;
+            } // Fin If            
+        } // Fin For
+        tipo = atributo.substr(0, linea);
+        variable = atributo.substr(linea + 1, atributo.size() - linea);
+        escritor << "        void set_" + variable + "(" + tipo + ");" + "\n"; 
+    } // Fin For
+    for (int i = 1; i <= num; i++){
+        string tipo, variable;
+        int linea;
+        string atributo;
+        atributo = informacion[i];
+        for (int j = 0; j < atributo.size(); j++){
+            if (atributo[j] == '|'){
+                linea = j;
+            } // Fin If            
+        } // Fin For
+        tipo = atributo.substr(0, linea);
+        variable = atributo.substr(linea + 1, atributo.size() - linea);
+        escritor <<  "        " + tipo + " get_" + variable + "();" + "\n"; 
+    } // Fin For
+    escritor << "        string toString();" << "\n";   
+    escritor << "        ~" + informacion[0] + "();" + "\n";
     escritor << "};" << "\n";
     escritor << "#endif" << "\n";
     escritor.close();
-    int contatributos;
     for (int i = 0; i < informacion.size(); i++){
         if (informacion[i] == ""){
             namecpp = "";
@@ -119,6 +264,9 @@ void guardarArchivo(vector<string> informacion){
             escritor << informacion[i + 1] + "::" + informacion[i + 1] + "() {" + "\n";
             escritor << "}" <<  "\n";
             escritor <<  "\n";
+            escritor << informacion[i + 1] + "::~" + informacion[i + 1] + "() {" + "\n";
+            escritor << "}" <<  "\n";
+            escritor <<  "\n";
             escritor.close();
             escritor.open(nameh, ios::app);
             string name;
@@ -131,9 +279,11 @@ void guardarArchivo(vector<string> informacion){
             escritor << "#include <string>" << "\n";
             escritor << "using namespace std;" << "\n";
             escritor << "class " + informacion[i + 1] + "{" + "\n";
-            escritor << "   private:" << "\n";
-            escritor << "   public:" << "\n";
-            escritor << informacion[i + 1] + "();" + "\n";
+            escritor << "    private:" << "\n";
+            escritor << "    public:" << "\n";
+            escritor << "        " + informacion[i + 1] + "();" + "\n";
+            escritor << "        ~" + informacion[i + 1] + "();" + "\n";
+            escritor << "        string toString();" << "\n";   
             escritor << "};" << "\n";
             escritor << "#endif" << "\n";
             escritor.close();
