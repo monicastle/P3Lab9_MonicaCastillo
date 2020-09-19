@@ -7,5 +7,4 @@
 [
     nombreclase:Persona
     Atributo:string|nombre
-    Atributo:int|edad
 ]
